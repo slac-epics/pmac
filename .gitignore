@@ -26,3 +26,4 @@ deleteme
 #etc/LabPowerPmac_Backup/
 .nfs*
 **/venv27
+RELEASE_SITE
