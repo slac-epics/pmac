@@ -17,10 +17,13 @@ ifdef SSH
 
 	powerPmacAsynPort_LIBS += asyn
 	powerPmacAsynPort_LIBS += motor
-	powerPmacAsynPort_LIBS += ssh2
+	powerPmacAsynPort_LIBS += ssh2 crypto z 
 	powerPmacAsynPort_LIBS += $(EPICS_BASE_IOC_LIBS)
 	ssh2_DIR = $(SSH_LIB)
+	z_DIR = $(ZLIB_LIB)
 	USR_INCLUDES+= $(SSH_INCLUDE)
+	USR_INCLUDES+= $(CRYPTO_INCLUDE)
+	USR_INCLUDES+= $(ZLIB_INCLUDE)
 	
 	#=============================
 	# Build the interactive shell test application
@@ -33,9 +36,13 @@ ifdef SSH
 	powerPMACShell_LIBS += powerPmacAsynPort
 	powerPMACShell_LIBS += asyn
 	powerPMACShell_LIBS += motor
-	powerPMACShell_LIBS += ssh2
+	powerPMACShell_LIBS += ssh2 crypto z
 	ssh2_DIR = $(SSH_LIB)
+	crypto_DIR = $(CRYPTO_LIB)
+	z_DIR = $(ZLIB_LIB)
 	USR_INCLUDES+= $(SSH_INCLUDE)
+	USR_INCLUDES+= $(CRYPTO_INCLUDE)
+	USR_INCLUDES+= $(ZLIB_INCLUDE)
 
 	# Finally link to the EPICS Base libraries
 	powerPMACShell_LIBS += $(EPICS_BASE_IOC_LIBS)
