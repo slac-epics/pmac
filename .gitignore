@@ -24,3 +24,4 @@ deleteme
 #etc/LabPowerPmac/
 #etc/LabPowerPmac_Backup/
 .nfs*
+RELEASE_SITE

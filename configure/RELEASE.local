@@ -1,14 +1,49 @@
-# The following definitions must be changed for each site
+# RELEASE.local
+#
+# Read definitions of:
+#	EPICS_SITE_TOP
+#	BASE_MODULE_VERSION
+#	EPICS_MODULES 
+# from one of the following options
+-include $(TOP)/../../RELEASE_SITE
+-include $(TOP)/RELEASE_SITE
 
-# These following three base definitions are overwritten by definitions in 
-# the RELEASE.<arch>.Common files. Included here for information only.
-# SUPPORT         = /dls_sw/prod/R3.14.12.7/support
-# WORK            = /dls_sw/work/R3.14.12.7/support
-# EPICS_BASE      = /dls_sw/epics/R3.14.12.7/base
+# Check that EPICS_MODULES was defined in a RELEASE_SITE file
+-include $(TOP)/../../RELEASE_SITE.check
 
-ASYN=       $(SUPPORT)/asyn/4-34
-CALC=       $(SUPPORT)/calc/3-7
-MOTOR=      $(SUPPORT)/motor/6-10-1dls1-1
-BUSY=       $(SUPPORT)/busy/1-7dls1
+# ==========================================================
+# Define the version strings for all needed modules
+# Use naming pattern:
+#   FOO_MODULE_VERSION = R1.2
+# so scripts can extract version strings
+# Don't set your version to anything such as "test" that
+# could match a directory name.
+# ==========================================================
+ASYN_MODULE_VERSION=R4.31-0.1.0
+CALC_MODULE_VERSION=R3.7-1.0.0
+MOTOR_MODULE_VERSION=R6.10.1-1.0.1
+BUSY_MODULE_VERSION=R1.6.1-0.2.4
 
+
+# ==========================================================
+# Define module paths using pattern
+# FOO = $(EPICS_MODULES)/foo/$(FOO_MODULE_VERSION)
+#  or
+# FOO = /Full/Path/To/Development/Version 
+# ==========================================================
+MOTOR=$(EPICS_MODULES)/motor/$(MOTOR_MODULE_VERSION)
+CALC=$(EPICS_MODULES)/calc/$(CALC_MODULE_VERSION)
+BUSY=$(EPICS_MODULES)/busy/$(BUSY_MODULE_VERSION)
+ASYN=$(EPICS_MODULES)/asyn/$(ASYN_MODULE_VERSION)
+
+# ============================================================
+#  Module Location
+# ============================================================
+
+
+# Set EPICS_BASE last so it appears last in the DB, DBD, INCLUDE, and LIB search paths
+EPICS_BASE              = $(EPICS_SITE_TOP)/base/$(BASE_MODULE_VERSION)
+
+# Check for undefined EPICS_BASE
+-include $(TOP)/../../EPICS_BASE.check
 
