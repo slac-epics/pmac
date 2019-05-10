@@ -27,12 +27,7 @@ BUILD_ARCHS = linux-x86_64
 #   for a subset of the cross-compiled target architectures
 #   that Base is built for.
 #CROSS_COMPILER_TARGET_ARCHS = RTEMS-beatnik
-
-ifeq (,$(findstring R3.14, $(EPICS_BASE)))
-  # If R3.14 is not in EPICS_BASE then build RTEMS support
-  # DLS support for RTEMS was added in epics 7
-  CROSS_COMPILER_TARGET_ARCHS = RTEMS-beatnik
-endif
+CROSS_COMPILER_TARGET_ARCHS =
 
 # To install files into a location other than $(TOP) define
 #   INSTALL_LOCATION here.
@@ -44,3 +39,15 @@ endif
 # You must rebuild in the iocBoot directory for this to
 #   take effect.
 #IOCS_APPL_TOP = </IOC/path/to/application/top>
+#
+SSH             = $(PACKAGE_SITE_TOP)/libssh2/1.8.2/$(PKG_ARCH)
+SSH_LIB         = $(SSH)/lib
+SSH_INCLUDE     = -I$(SSH)/include
+
+CRYPTO		= $(PACKAGE_SITE_TOP)/openssl/openssl-1.0.2q/$(PKG_ARCH)
+CRYPTO_LIB	= $(CRYPTO)/lib
+CRYPTO_INCLUDE	= -I$(CRYPTO)/include
+
+ZLIB		= $(PACKAGE_SITE_TOP)/zlib/1.2.8/$(PKG_ARCH)
+ZLIB_LIB	= $(ZLIB)/lib
+ZLIB_INCLUDE	= -I$(ZLIB)/include
