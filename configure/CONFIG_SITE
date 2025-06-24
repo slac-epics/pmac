@@ -33,6 +33,10 @@ CROSS_COMPILER_TARGET_ARCHS =
 #   INSTALL_LOCATION here.
 #INSTALL_LOCATION=</path/name/to/install/top>
 
+ifdef T_A
+PKG_ARCH=$(T_A)
+endif
+
 # Set this when your IOC and the host use different paths
 #   to access the application. This will be needed to boot
 #   from a Microsoft FTP server or with some NFS mounts.
@@ -40,7 +44,7 @@ CROSS_COMPILER_TARGET_ARCHS =
 #   take effect.
 #IOCS_APPL_TOP = </IOC/path/to/application/top>
 #
-SSH             = $(PACKAGE_SITE_TOP)/libssh2/1.8.2/$(PKG_ARCH)
+SSH             = $(PACKAGE_SITE_TOP)/libssh2/1.11.0/$(PKG_ARCH)
 SSH_LIB         = $(SSH)/lib
 SSH_INCLUDE     = -I$(SSH)/include
 
