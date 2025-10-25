@@ -1,3 +1,6 @@
+R2.4.10-1.0.7   (lorelli)
+      - Upgrade to motor/R6.10.1-2.6.1
+
 R2.4.10-1.0.6   (lorelli)
       - Upgrade to libssh/1.11.0
       - Upgrade to asyn/R4.39-1.0.2, motor/R6.10.1-2.5.1, busy/R1.7.2.1-0.1.3
