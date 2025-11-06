@@ -1,3 +1,6 @@
+R2.4.10-1.0.8   (lorelli)
+      - Allow dynamically setting precision of commanded position
+
 R2.4.10-1.0.7   (lorelli)
       - Upgrade to motor/R6.10.1-2.6.1
 
