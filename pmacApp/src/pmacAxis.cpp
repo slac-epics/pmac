@@ -232,8 +232,10 @@ asynStatus pmacAxis::move(double position, int relative, double min_velocity, do
   }
 
   if (pC_->movesDeferred_ == 0) {
-    sprintf(command, "%s%s#%d %s%.2f", vel_buff, acc_buff, axisNo_,
-            (relative ? "J^" : "J="), position / scale_);
+    double logScale = 1;
+    logScale = log10(scale_);
+    sprintf(command, "%s%s#%d %s%.*f", vel_buff, acc_buff, axisNo_,
+            (relative ? "J^" : "J="), (int)logScale+1,  position / scale_);
   } else { /* deferred moves */
     sprintf(command, "%s%s", vel_buff, acc_buff);
     deferredPosition_ = position / scale_;
