@@ -1,0 +1,4 @@
+R2.7.9-1.0.0
+      - Allow dynamically setting precision of commanded position
+      - Use motor/R6.10.1-2.6.1, libssh/1.11.0, asyn/R4.39-1.0.2, busy/R1.7.2.1-0.1.3
+      - SLAC build system changes
