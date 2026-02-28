@@ -2710,6 +2710,7 @@ asynStatus pmacController::poll() {
     pBroker_->updateVariables(pmacMessageBroker::PMAC_FAST_READ);
     this->updateStatistics();
     setDoubleParam(PMAC_C_FastUpdateTime_, pBroker_->readUpdateTime());
+    setIntegerParam(this->PMAC_C_GlobalStatus_, false);
     if (epicsTimeDiffInSeconds(&nowTime_, &lastMediumTime_) >= PMAC_MEDIUM_LOOP_TIME / 1000.0) {
       epicsTimeAddSeconds(&lastMediumTime_, PMAC_MEDIUM_LOOP_TIME / 1000.0);
       debug(DEBUG_TIMING, functionName, "Medium update has been called", tBuff);
