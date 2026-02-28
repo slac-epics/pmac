@@ -44,14 +44,19 @@ endif
 #   take effect.
 #IOCS_APPL_TOP = </IOC/path/to/application/top>
 #
-SSH             = $(PACKAGE_SITE_TOP)/libssh2/1.11.0/$(PKG_ARCH)
+#SSH             = $(PACKAGE_SITE_TOP)/libssh2/1.11.0/$(PKG_ARCH)
+SSH_VERSION     = 1.11.0
+SSH             = $(AFS2SDF)$(AFS_LCLS)/package/libssh2/$(SSH_VERSION)/$(PKG_ARCH)
 SSH_LIB         = $(SSH)/lib
 SSH_INCLUDE     = -I$(SSH)/include
 
-CRYPTO		= $(PACKAGE_SITE_TOP)/openssl/openssl-1.0.2q/$(PKG_ARCH)
+CRYPTO_VERSION = openssl-1.0.2q
+CRYPTO         = $(AFS2SDF)$(AFS_LCLS)/package/openssl/$(CRYPTO_VERSION)/$(PKG_ARCH)
+#CRYPTO		= $(PACKAGE_SITE_TOP)/openssl/openssl-1.0.2q/$(PKG_ARCH)
 CRYPTO_LIB	= $(CRYPTO)/lib
 CRYPTO_INCLUDE	= -I$(CRYPTO)/include
 
 ZLIB		= $(PACKAGE_SITE_TOP)/zlib/1.2.8/$(PKG_ARCH)
 ZLIB_LIB	= $(ZLIB)/lib
 ZLIB_INCLUDE	= -I$(ZLIB)/include
+
