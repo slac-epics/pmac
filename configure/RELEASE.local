@@ -7,6 +7,7 @@
 # from one of the following options
 -include $(TOP)/../../RELEASE_SITE
 -include $(TOP)/RELEASE_SITE
+-include $(TOP)/../../RELEASE_SITE_7.0.3.1-1.0_sdf
 
 # Check that EPICS_MODULES was defined in a RELEASE_SITE file
 -include $(TOP)/../../RELEASE_SITE.check
@@ -21,7 +22,8 @@
 # ==========================================================
 ASYN_MODULE_VERSION=R4.39-1.0.2
 CALC_MODULE_VERSION=R3.7-1.0.1
-MOTOR_MODULE_VERSION=R6.10.1-2.5.1
+#MOTOR_MODULE_VERSION=R6.10.1-2.5.1
+MOTOR_MODULE_VERSION=R7.2.2
 BUSY_MODULE_VERSION=R1.7.2.1-0.1.3
 
 
@@ -31,7 +33,8 @@ BUSY_MODULE_VERSION=R1.7.2.1-0.1.3
 #  or
 # FOO = /Full/Path/To/Development/Version 
 # ==========================================================
-MOTOR=$(EPICS_MODULES)/motor/$(MOTOR_MODULE_VERSION)
+#MOTOR=$(EPICS_MODULES)/motor/$(MOTOR_MODULE_VERSION)
+MOTOR=$(EPICS_SITE_TOP_SPEAR)/epics/modules/motor/$(MOTOR_MODULE_VERSION)
 CALC=$(EPICS_MODULES)/calc/$(CALC_MODULE_VERSION)
 BUSY=$(EPICS_MODULES)/busy/$(BUSY_MODULE_VERSION)
 ASYN=$(EPICS_MODULES)/asyn/$(ASYN_MODULE_VERSION)
