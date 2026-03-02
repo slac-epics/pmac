@@ -1,3 +1,11 @@
+
+R2.7.9-2.0.0-0.1  3/2/26  M. Dunning
+    SPEAR branch
+    - Support spear build on rhel9
+    - Clear global status flag
+    - Use newer version of motor record
+    - Disable pmac soft limit checks.  This allows open-loop with an external encoder.
+
 R2.7.9-2.0.0
       - Downgraded motor record version to R6.10.1-2.5.1
 R2.7.9-1.0.0

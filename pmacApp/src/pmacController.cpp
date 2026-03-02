@@ -2149,83 +2149,83 @@ asynStatus pmacController::writeFloat64(asynUser *pasynUser, epicsFloat64 value)
     pAxis->callParamCallbacks();
     wakeupPoller();
   } else if (function == motorLowLimit_) {
-    // Limits in counts
-    int lowLimitCounts = int(std::floor(value/pAxis->scale_ + 0.5));
-    int highLimitCounts = int(std::floor(pAxis->highLimit_/pAxis->scale_ + 0.5));
-    // Check if requested limit is zero counts
-    if (lowLimitCounts == 0) {
-      // Check the other limit
-      if (highLimitCounts == 0) {
-        // Both limits are zero, so disable soft limits on PMAC
-        sprintf(command, "I%d13=0 I%d14=0", pAxis->axisNo_, pAxis->axisNo_);
-        asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW,
-          "%s: Setting both soft limits on controller %s, axis %d to 0 counts\n",
-          functionName, portName, pAxis->axisNo_);
-      }
-      else {
-        // Only one limit is zero, so set to 1 count to avoid disabling it
-        sprintf(command, "I%d14=1", pAxis->axisNo_);
-        asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW,
-          "%s: Setting low soft limit on controller %s, axis %d to 1 count\n",
-          functionName, portName, pAxis->axisNo_);
-      }
-    } else {
-      // Otherwise check if we also need to re-enable the other limit
-      if (highLimitCounts == 0) {
-        // Set low limit and re-enable the high limit by setting to 1 count
-        sprintf(command, "I%d14=%d I%d13=1", pAxis->axisNo_, lowLimitCounts, pAxis->axisNo_);
-        asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW,
-          "%s: Setting low, high soft limits on controller %s, axis %d to %d, 1 counts\n",
-          functionName, portName, pAxis->axisNo_, lowLimitCounts);
-      }
-      else {
-        // Just set low limit
-        sprintf(command, "I%d14=%d", pAxis->axisNo_, lowLimitCounts);
-        asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW,
-              "%s: Setting low soft limit on controller %s, axis %d to %d counts\n",
-              functionName, portName, pAxis->axisNo_, lowLimitCounts);
-      }
-    }
-    // Update limit on pmacAxis
+    //// Limits in counts
+    //int lowLimitCounts = int(std::floor(value/pAxis->scale_ + 0.5));
+    //int highLimitCounts = int(std::floor(pAxis->highLimit_/pAxis->scale_ + 0.5));
+    //// Check if requested limit is zero counts
+    //if (lowLimitCounts == 0) {
+    //  // Check the other limit
+    //  if (highLimitCounts == 0) {
+    //    // Both limits are zero, so disable soft limits on PMAC
+    //    sprintf(command, "I%d13=0 I%d14=0", pAxis->axisNo_, pAxis->axisNo_);
+    //    asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW,
+    //      "%s: Setting both soft limits on controller %s, axis %d to 0 counts\n",
+    //      functionName, portName, pAxis->axisNo_);
+    //  }
+    //  else {
+    //    // Only one limit is zero, so set to 1 count to avoid disabling it
+    //    sprintf(command, "I%d14=1", pAxis->axisNo_);
+    //    asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW,
+    //      "%s: Setting low soft limit on controller %s, axis %d to 1 count\n",
+    //      functionName, portName, pAxis->axisNo_);
+    //  }
+    //} else {
+    //  // Otherwise check if we also need to re-enable the other limit
+    //  if (highLimitCounts == 0) {
+    //    // Set low limit and re-enable the high limit by setting to 1 count
+    //    sprintf(command, "I%d14=%d I%d13=1", pAxis->axisNo_, lowLimitCounts, pAxis->axisNo_);
+    //    asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW,
+    //      "%s: Setting low, high soft limits on controller %s, axis %d to %d, 1 counts\n",
+    //      functionName, portName, pAxis->axisNo_, lowLimitCounts);
+    //  }
+    //  else {
+    //    // Just set low limit
+    //    sprintf(command, "I%d14=%d", pAxis->axisNo_, lowLimitCounts);
+    //    asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW,
+    //          "%s: Setting low soft limit on controller %s, axis %d to %d counts\n",
+    //          functionName, portName, pAxis->axisNo_, lowLimitCounts);
+    //  }
+    //}
+    //// Update limit on pmacAxis
     pAxis->lowLimit_ = value;
   } else if (function == motorHighLimit_) {
-    // Limits in counts
-    int lowLimitCounts = int(std::floor(pAxis->lowLimit_/pAxis->scale_ + 0.5));
-    int highLimitCounts = int(std::floor(value/pAxis->scale_ + 0.5));
-    // Check if requested limit is zero counts
-    if (highLimitCounts == 0) {
-      // Check the other limit
-      if (lowLimitCounts == 0) {
-        // Both limits are zero, so disable soft limits on PMAC
-        sprintf(command, "I%d13=0 I%d14=0", pAxis->axisNo_, pAxis->axisNo_);
-        asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW,
-          "%s: Setting both soft limits on controller %s, axis %d to 0 counts\n",
-          functionName, portName, pAxis->axisNo_);
-      }
-      else {
-        // Only one limit is zero, so set to 1 count to avoid disabling it
-        sprintf(command, "I%d13=1", pAxis->axisNo_);
-        asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW,
-          "%s: Setting high soft limit on controller %s, axis %d to 1 count\n",
-          functionName, portName, pAxis->axisNo_);
-      }
-    }
-    else {
-      if (lowLimitCounts == 0) {
-        // Set high limit and re-enable the low limit by setting to 1 count
-        sprintf(command, "I%d13=%d I%d14=1", pAxis->axisNo_, highLimitCounts, pAxis->axisNo_);
-        asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW,
-          "%s: Setting low, high soft limits on controller %s, axis %d to 1, %d counts\n",
-          functionName, portName, pAxis->axisNo_, highLimitCounts);
-      }
-      else {
-        // Just set the high limit
-        sprintf(command, "I%d13=%d", pAxis->axisNo_, highLimitCounts);
-        asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW,
-          "%s: Setting high soft limit on controller %s, axis %d to %d counts\n",
-          functionName, portName, pAxis->axisNo_, highLimitCounts);
-      }
-    }
+    //// Limits in counts
+    //int lowLimitCounts = int(std::floor(pAxis->lowLimit_/pAxis->scale_ + 0.5));
+    //int highLimitCounts = int(std::floor(value/pAxis->scale_ + 0.5));
+    //// Check if requested limit is zero counts
+    //if (highLimitCounts == 0) {
+    //  // Check the other limit
+    //  if (lowLimitCounts == 0) {
+    //    // Both limits are zero, so disable soft limits on PMAC
+    //    sprintf(command, "I%d13=0 I%d14=0", pAxis->axisNo_, pAxis->axisNo_);
+    //    asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW,
+    //      "%s: Setting both soft limits on controller %s, axis %d to 0 counts\n",
+    //      functionName, portName, pAxis->axisNo_);
+    //  }
+    //  else {
+    //    // Only one limit is zero, so set to 1 count to avoid disabling it
+    //    sprintf(command, "I%d13=1", pAxis->axisNo_);
+    //    asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW,
+    //      "%s: Setting high soft limit on controller %s, axis %d to 1 count\n",
+    //      functionName, portName, pAxis->axisNo_);
+    //  }
+    //}
+    //else {
+    //  if (lowLimitCounts == 0) {
+    //    // Set high limit and re-enable the low limit by setting to 1 count
+    //    sprintf(command, "I%d13=%d I%d14=1", pAxis->axisNo_, highLimitCounts, pAxis->axisNo_);
+    //    asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW,
+    //      "%s: Setting low, high soft limits on controller %s, axis %d to 1, %d counts\n",
+    //      functionName, portName, pAxis->axisNo_, highLimitCounts);
+    //  }
+    //  else {
+    //    // Just set the high limit
+    //    sprintf(command, "I%d13=%d", pAxis->axisNo_, highLimitCounts);
+    //    asynPrint(this->pasynUserSelf, ASYN_TRACE_FLOW,
+    //      "%s: Setting high soft limit on controller %s, axis %d to %d counts\n",
+    //      functionName, portName, pAxis->axisNo_, highLimitCounts);
+    //  }
+    //}
     // Update limit on pmacAxis
     pAxis->highLimit_ = value;
   } else if (function == PMAC_C_FeedRate_) {

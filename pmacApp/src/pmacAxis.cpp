@@ -209,8 +209,8 @@ asynStatus pmacAxis::getAxisInitialStatus(void) {
                 "%s: Error: initial status poll failed on axis %d.\n", functionName, axisNo_);
       return asynError;
     } else {
-      setDoubleParam(pC_->motorLowLimit_, lowLimit_ * scale_);
-      setDoubleParam(pC_->motorHighLimit_, highLimit_ * scale_);
+      //setDoubleParam(pC_->motorLowLimit_, lowLimit_ * scale_);
+      //setDoubleParam(pC_->motorHighLimit_, highLimit_ * scale_);
       setDoubleParam(pC_->motorPGain_, pgain);
       setDoubleParam(pC_->motorIGain_, igain);
       setDoubleParam(pC_->motorDGain_, dgain);
